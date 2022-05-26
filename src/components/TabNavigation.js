@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
-import HomeScreen from '../screens/HomeScreen';
 import BoardScreen from '../screens/BoardScreen';
 import CalendarScreen from '../screens/CalendarScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import HomeStackNavigation from './HomeStackNavigation';
 
 import { ColorCode } from '../utils/constants';
 
@@ -39,7 +39,7 @@ const TabNavigation = () => {
           },
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Home" component={HomeStackNavigation} />
         <Tab.Screen name="Board" component={BoardScreen} />
         <Tab.Screen name="Calendar" component={CalendarScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
