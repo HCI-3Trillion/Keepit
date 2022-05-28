@@ -13,13 +13,16 @@ const BasicButton = ({ title, handler }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: ColorCode.PRIMARY,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 15,
+    margin: 10,
+    borderRadius: 100,
   },
   title: {
     color: 'white',
+    fontSize: 20,
   },
 });
 

@@ -34,7 +34,7 @@ const EditScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: imgUri }} style={styles.image} />
-      <BasicButton title="Save" style={styles.button} handler={saveImage} />
+      <BasicButton title="Save" handler={saveImage} />
     </View>
   );
 };
@@ -44,9 +44,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    flex: 1,
-  },
-  button: {
     flex: 1,
   },
 });
