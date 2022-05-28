@@ -1,7 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import TabNavigation from './src/components/TabNavigation';
-
-const Stack = createNativeStackNavigator();
+import TabNavigation from './src/navigations/TabNavigation';
 
 export default function App() {
   return <TabNavigation />;

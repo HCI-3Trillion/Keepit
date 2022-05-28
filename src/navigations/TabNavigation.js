@@ -3,10 +3,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
 
-import BoardScreen from '../screens/BoardScreen';
-import CalendarScreen from '../screens/CalendarScreen';
-import SettingsScreen from '../screens/SettingsScreen';
 import HomeStackNavigation from './HomeStackNavigation';
+import BoardStackNavigation from './BoardStackNavigation';
+import CalendarStackNavigation from './CalendarStackNavigation';
+import SettingsStackNavigation from './SettingsStackNavigation';
 
 import { ColorCode } from '../utils/constants';
 
@@ -20,13 +20,13 @@ const TabNavigation = () => {
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
-            if (route.name === 'Home') {
+            if (route.name === 'HomeNavi') {
               iconName = 'home';
-            } else if (route.name === 'Board') {
+            } else if (route.name === 'BoardNavi') {
               iconName = 'th-large';
-            } else if (route.name === 'Calendar') {
+            } else if (route.name === 'CalendarNavi') {
               iconName = 'calendar-o';
-            } else if (route.name === 'Settings') {
+            } else if (route.name === 'SettingsNavi') {
               iconName = 'gear';
             }
 
@@ -37,12 +37,13 @@ const TabNavigation = () => {
           tabBarStyle: {
             height: 60,
           },
+          headerShown: false,
         })}
       >
-        <Tab.Screen name="Home" component={HomeStackNavigation} />
-        <Tab.Screen name="Board" component={BoardScreen} />
-        <Tab.Screen name="Calendar" component={CalendarScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
+        <Tab.Screen name="HomeNavi" component={HomeStackNavigation} />
+        <Tab.Screen name="BoardNavi" component={BoardStackNavigation} />
+        <Tab.Screen name="CalendarNavi" component={CalendarStackNavigation} />
+        <Tab.Screen name="SettingsNavi" component={SettingsStackNavigation} />
       </Tab.Navigator>
     </NavigationContainer>
   );
