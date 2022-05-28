@@ -20,7 +20,7 @@ const TabNavigation = () => {
           tabBarIcon: ({ color, size }) => {
             let iconName;
 
-            if (route.name === 'Home') {
+            if (route.name === 'HomeNavi') {
               iconName = 'home';
             } else if (route.name === 'Board') {
               iconName = 'th-large';
@@ -37,9 +37,10 @@ const TabNavigation = () => {
           tabBarStyle: {
             height: 60,
           },
+          headerShown: false,
         })}
       >
-        <Tab.Screen name="Home" component={HomeStackNavigation} />
+        <Tab.Screen name="HomeNavi" component={HomeStackNavigation} />
         <Tab.Screen name="Board" component={BoardScreen} />
         <Tab.Screen name="Calendar" component={CalendarScreen} />
         <Tab.Screen name="Settings" component={SettingsScreen} />
