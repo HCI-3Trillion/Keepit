@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { Camera } from 'expo-camera';
 
-const CameraScreen = () => {
+const CameraScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
-  const [image, setImage] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
+    getPermissions();
   }, []);
+
+  const getPermissions = async () => {
+    const { status } = await Camera.requestCameraPermissionsAsync();
+    setHasPermission(status === 'granted');
+  };
 
   const takePicture = async () => {
     if (camera) {
-      const data = await camera.takePictureAsync(null);
-      setImage(data.uri);
+      const { uri } = await camera.takePictureAsync();
+      navigation.navigate('Edit', { imgUri: uri });
     }
   };
 
@@ -48,7 +49,6 @@ const CameraScreen = () => {
           title="Flip"
         />
         <Button style={styles.button} onPress={() => takePicture()} title="Take Picture" />
-        {image && <Image source={{ uri: image }} style={{ flex: 1 }} />}
       </View>
       <StatusBar style="auto" />
     </View>
