@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, TextInput } from 'react-native';
 import * as MediaLibrary from 'expo-media-library';
 
 import BasicButton from '../components/BasicButton';
@@ -34,6 +34,7 @@ const EditScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <Image source={{ uri: imgUri }} style={styles.image} />
+      <TextInput style={styles.textinput} />
       <BasicButton title="Save" handler={saveImage} />
     </View>
   );
@@ -41,6 +42,9 @@ const EditScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  textinput: {
     flex: 1,
   },
   image: {
