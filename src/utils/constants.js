@@ -3,4 +3,6 @@ const ColorCode = {
   GRAY1: '#8F9BB3',
 };
 
-export { ColorCode };
+const EmotionName = ["ALL","Love","Angry","Happy","Joyful","Amazed","Sick","Shy","Panic","Laugh"];
+
+export { ColorCode, EmotionName};
