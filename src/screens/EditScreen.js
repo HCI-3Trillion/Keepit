@@ -27,7 +27,7 @@ const EditScreen = ({ route }) => {
     if (album === null) {
       await MediaLibrary.createAlbumAsync('Keepit', asset, false);
     } else {
-      await MediaLibrary.addAssetsToAlbumAsync(asset, album.id);
+      await MediaLibrary.addAssetsToAlbumAsync(asset, album.id, false);
     }
   };
 
