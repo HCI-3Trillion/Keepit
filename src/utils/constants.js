@@ -5,4 +5,6 @@ const ColorCode = {
   PINK: '#FDC4DC',
 };
 
-export { ColorCode };
+const EmotionName = ["ALL","Love","Angry","Happy","Joyful","Amazed","Sick","Shy","Panic","Laugh"];
+
+export { ColorCode, EmotionName};
