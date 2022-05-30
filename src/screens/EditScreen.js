@@ -22,6 +22,7 @@ const EditScreen = ({ route, navigation }) => {
               multiline
               numberOfLines={5}
               onChangeText={(newCmt) => setComment(newCmt)}
+              textAlignVertical={'top'}
             />
           </View>
           <BasicButton
@@ -49,12 +50,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   imageWrapper: {
+    marginTop: 10,
     flex: 1,
     flexDirection: 'row',
+    padding: 10,
   },
   image: {
     flex: 1,
     aspectRatio: 1,
+    borderRadius: 10,
   },
 });
 
