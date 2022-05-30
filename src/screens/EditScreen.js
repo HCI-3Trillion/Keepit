@@ -1,42 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Image, TextInput } from 'react-native';
-import * as MediaLibrary from 'expo-media-library';
+import React, { useState } from 'react';
+import { StyleSheet, KeyboardAvoidingView, ScrollView, Image, TextInput, View } from 'react-native';
 
 import BasicButton from '../components/BasicButton';
+import { ColorCode } from '../utils/constants';
 
-const EditScreen = ({ route }) => {
-  const [hasPermission, setHasPermission] = useState(null);
+const EditScreen = ({ route, navigation }) => {
+  const [comment, setComment] = useState('');
   const { imgUri } = route.params;
 
-  useEffect(() => {
-    getPermissions();
-  }, []);
-
-  const getPermissions = async () => {
-    const { status } = await MediaLibrary.getPermissionsAsync();
-    if (status !== 'granted') {
-      const permission = await MediaLibrary.requestPermissionsAsync();
-      setHasPermission(permission.status === 'granted');
-    }
-  };
-
-  const saveImage = async () => {
-    const asset = await MediaLibrary.createAssetAsync(imgUri);
-    const album = await MediaLibrary.getAlbumAsync('Keepit');
-
-    if (album === null) {
-      await MediaLibrary.createAlbumAsync('Keepit', asset, false);
-    } else {
-      await MediaLibrary.addAssetsToAlbumAsync(asset, album.id, false);
-    }
-  };
-
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: imgUri }} style={styles.image} />
-      <TextInput style={styles.textinput} />
-      <BasicButton title="Save" handler={saveImage} />
-    </View>
+    <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
+      <ScrollView>
+        <View style={styles.contentContainer}>
+          <View style={styles.imageWrapper}>
+            <Image source={{ uri: imgUri }} style={styles.image} />
+          </View>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={styles.input}
+              placeholder="Add a comment..."
+              multiline
+              numberOfLines={5}
+              onChangeText={(newCmt) => setComment(newCmt)}
+              textAlignVertical={'top'}
+            />
+          </View>
+          <BasicButton
+            title="Choose Emotions"
+            handler={() => navigation.navigate('EmotionSelect', { comment, imgUri })}
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -44,11 +39,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  textinput: {
+  contentContainer: {},
+  inputWrapper: {
+    padding: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: ColorCode.GRAY1,
+    borderRadius: 10,
+    padding: 10,
+  },
+  imageWrapper: {
+    marginTop: 10,
     flex: 1,
+    flexDirection: 'row',
+    padding: 10,
   },
   image: {
     flex: 1,
+    aspectRatio: 1,
+    borderRadius: 10,
   },
 });
 
