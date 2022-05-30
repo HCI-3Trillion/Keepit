@@ -5,7 +5,7 @@ import Emotion from '../components/Emotion';
 import stories from '../stores/stories';
 import { ColorCode } from '../utils/constants';
 
-const StoryDetailScreen = ({ route }) => {
+const StoryDetailScreen = () => {
   return (
     <View>
       <View style={styles.emotionContainer}>
