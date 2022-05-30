@@ -1,22 +1,23 @@
 import React from 'react';
-import { StyleSheet, TextInput, View, Image, Text } from 'react-native';
+import { StyleSheet, View, Image, Text } from 'react-native';
 
 import Emotion from '../components/Emotion';
-import stories from '../stores/stories';
 import { ColorCode } from '../utils/constants';
 
-const StoryDetailScreen = () => {
+const StoryDetailScreen = ({ route }) => {
+  const { comment, date, emotion, imgLink } = route.params;
+
   return (
     <View>
       <View style={styles.emotionContainer}>
-        <Emotion emotion={stories[0].emotion} />
+        <Emotion emotion={emotion} />
       </View>
       <View style={styles.imageWrapper}>
-        <Image source={stories[0].imgLink} style={styles.image} />
+        <Image source={imgLink} style={styles.image} />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.text}>{stories[0].comment}</Text>
-        <Text style={styles.date}>{stories[0].date}</Text>
+        <Text style={styles.text}>{comment}</Text>
+        <Text style={styles.date}>{date}</Text>
       </View>
     </View>
   );

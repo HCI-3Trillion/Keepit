@@ -36,8 +36,13 @@ const EmotionSelectScreen = ({ route, navigation }) => {
 
   const saveStory = async () => {
     // await saveImage();
-    // comment, emotion 저장
-    navigation.navigate('StoryDetail', { comment, emotion, imgUri });
+    // comment, emotion, img 저장
+    navigation.navigate('StoryDetail', {
+      comment,
+      emotion,
+      imgUri,
+      date: new Date().toDateString(),
+    });
   };
 
   return (

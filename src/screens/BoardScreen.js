@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 
 import { EmotionName } from '../utils/constants';
 import ArrowButton from '../components/ArrowButton';
@@ -7,15 +7,17 @@ import ImageBox from '../components/ImageBox';
 
 import stories from '../stores/stories';
 
-const BoardScreen = () => {
+const BoardScreen = ({ navigation }) => {
   const [boardNum, setBoardNum] = useState(0);
-  const [storyList, setStoryList] = useState(stories.reverse());
+  const [storyList, setStoryList] = useState(stories.sort((a, b) => b.id - a.id));
 
   useEffect(() => {
     const list =
       boardNum == 0
-        ? stories.reverse()
-        : stories.reverse().filter((story) => story.emotion == EmotionName[boardNum]);
+        ? stories.sort((a, b) => b.id - a.id)
+        : stories
+            .filter((story) => story.emotion == EmotionName[boardNum])
+            .sort((a, b) => b.id - a.id);
     setStoryList(list);
   }, [boardNum]);
 
@@ -25,6 +27,10 @@ const BoardScreen = () => {
 
   const onDecrease = () => {
     setBoardNum(boardNum - 1 == -1 ? 9 : boardNum - 1);
+  };
+
+  const moveToStoryDetail = ({ id, comment, date, emotion, imgLink }) => {
+    navigation.navigate('StoryDetail', { id, comment, date, emotion, imgLink });
   };
 
   return (
@@ -44,7 +50,9 @@ const BoardScreen = () => {
         <FlatList
           key={'#'}
           data={storyList}
-          renderItem={({ item }) => <ImageBox id={item.id} />}
+          renderItem={({ item }) => (
+            <ImageBox imgLink={item.imgLink} handler={() => moveToStoryDetail(item)} />
+          )}
           keyExtractor={(item) => item.id}
           numColumns={3}
         />

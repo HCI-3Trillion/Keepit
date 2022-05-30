@@ -4,10 +4,10 @@ import { StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { ColorCode } from '../utils/constants';
 import stories from '../stores/stories';
 
-const ImageBox = ({ id }) => {
+const ImageBox = ({ imgLink, handler }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => {}}>
-      <Image source={stories[id - 1].imgLink} style={styles.image} />
+    <TouchableOpacity style={styles.container} onPress={handler}>
+      <Image source={imgLink} style={styles.image} />
     </TouchableOpacity>
   );
 };
