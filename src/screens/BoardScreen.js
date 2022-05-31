@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import StoryContext from '../stores/StoryContext';
 
 import { EmotionName } from '../utils/constants';
 import ArrowButton from '../components/ArrowButton';
 import ImageBox from '../components/ImageBox';
 
-import stories from '../stores/stories';
-
 const BoardScreen = ({ navigation }) => {
+  const { stories } = useContext(StoryContext);
   const [boardNum, setBoardNum] = useState(0);
   const [storyList, setStoryList] = useState(stories.sort((a, b) => b.id - a.id));
+
+  useEffect(() => {
+    setStoryList(stories.sort((a, b) => b.id - a.id));
+  }, [stories]);
 
   useEffect(() => {
     const list =
