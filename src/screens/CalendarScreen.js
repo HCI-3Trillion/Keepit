@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+
 import ArrowButton from '../components/ArrowButton';
 import DayBox from '../components/DayBox';
+
+import stories from '../stores/stories';
 import { ColorCode, MonthName, DayName } from '../utils/constants';
 
-const CalendarScreen = () => {
+const CalendarScreen = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
@@ -21,6 +24,18 @@ const CalendarScreen = () => {
     const init = Array.from({ length: firstDay }, (v, i) => 0);
     const array = Array.from({ length: lastDate }, (v, i) => i + 1);
     return [...init, ...array];
+  };
+
+  const moveToStoryDetail = ({ id, comment, date, emotion, imgLink }) => {
+    navigation.navigate('StoryDetail', { id, comment, date, emotion, imgLink });
+  };
+
+  const isSameDate = (storyDate, currDate) => {
+    return (
+      storyDate.getFullYear() == date.getFullYear() &&
+      storyDate.getMonth() == date.getMonth() &&
+      storyDate.getDate() == currDate
+    );
   };
 
   return (
@@ -49,7 +64,16 @@ const CalendarScreen = () => {
           <FlatList
             key={'#'}
             data={generateDays()}
-            renderItem={({ item }) => <DayBox text={item} emotion={'Love'} handler={() => {}} />}
+            renderItem={({ item }) => {
+              const story = stories.filter((story) => isSameDate(story.date, item))[0];
+              return (
+                <DayBox
+                  text={item}
+                  emotion={story ? story.emotion : 'none'}
+                  handler={story ? () => moveToStoryDetail(story) : () => {}}
+                />
+              );
+            }}
             keyExtractor={(item) => item}
             numColumns={7}
           />

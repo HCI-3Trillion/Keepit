@@ -9,10 +9,10 @@ const DayBox = ({ emotion, text, handler }) => {
 
   return (
     <TouchableOpacity
-      style={styles(text == 0 ? 'transparent' : ColorCode[colors[emotion]]).container}
+      style={styles(emotion == 'none' ? 'transparent' : ColorCode[colors[emotion]]).container}
       onPress={handler}
     >
-      <Text style={tstyles(emotion ? 'white' : 'black')}>{text == 0 ? '' : text}</Text>
+      <Text style={tstyles(emotion == 'none' ? 'black' : 'white')}>{text == 0 ? '' : text}</Text>
     </TouchableOpacity>
   );
 };
