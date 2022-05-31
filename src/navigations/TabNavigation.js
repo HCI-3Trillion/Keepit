@@ -38,6 +38,7 @@ const TabNavigation = () => {
             height: 60,
           },
           headerShown: false,
+          tabBarShowLabel: false,
         })}
       >
         <Tab.Screen name="HomeNavi" component={HomeStackNavigation} />
