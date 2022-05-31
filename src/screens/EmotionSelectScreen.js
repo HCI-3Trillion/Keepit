@@ -1,48 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import * as MediaLibrary from 'expo-media-library';
+import StoryContext from '../stores/StoryContext';
 
 import BasicButton from '../components/BasicButton';
 import Emotion from '../components/Emotion';
 import { ColorCode } from '../utils/constants';
 
 const EmotionSelectScreen = ({ route, navigation }) => {
-  const [hasPermission, setHasPermission] = useState(null);
+  const { stories, setStories, setStoryNum, storyNum } = useContext(StoryContext);
   const [emotion, setEmotion] = useState(null);
   const { imgUri, comment } = route.params;
 
-  useEffect(() => {
-    getPermissions();
-  }, []);
-
-  const getPermissions = async () => {
-    const { status } = await MediaLibrary.getPermissionsAsync();
-    if (status !== 'granted') {
-      const permission = await MediaLibrary.requestPermissionsAsync();
-      setHasPermission(permission.status === 'granted');
-    }
-  };
-
-  const saveImage = async () => {
-    const asset = await MediaLibrary.createAssetAsync(imgUri);
-    const album = await MediaLibrary.getAlbumAsync('Keepit');
-
-    if (album === null) {
-      await MediaLibrary.createAlbumAsync('Keepit', asset, false);
-    } else {
-      await MediaLibrary.addAssetsToAlbumAsync(asset, album.id, false);
-    }
-  };
-
   const saveStory = async () => {
-    // await saveImage();
-    // comment, emotion, img 저장
-    navigation.navigate('StoryDetail', {
+    const newStory = {
       comment,
       emotion,
-      imgUri,
+      imgLink: { uri: imgUri },
       date: new Date(),
-    });
+    };
+    setStories((prev) => [...prev, { ...newStory, id: storyNum }]);
+    setStoryNum((prev) => prev + 1);
+    console.log(stories);
+    navigation.navigate('StoryDetail', newStory);
   };
 
   return (
