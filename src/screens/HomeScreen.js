@@ -53,6 +53,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     letterSpacing: 2,
+    marginLeft: 5,
+    marginTop: 3,
   },
   bubbleContainer: {
     flex: 2,
