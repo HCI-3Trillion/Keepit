@@ -41,7 +41,7 @@ const EmotionSelectScreen = ({ route, navigation }) => {
       comment,
       emotion,
       imgUri,
-      date: new Date().toDateString(),
+      date: new Date(),
     });
   };
 
