@@ -1,8 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, Dimensions } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  Image,
+  Dimensions,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { ColorCode } from '../utils/constants';
-import { ImageBackground, TouchableOpacity } from 'react-native-web';
+import Bubble from '../../assets/bubble.png';
+import Plus from '../../assets/buttonImg.png';
+//import { ImageBackground, TouchableOpacity } from 'react-native-web';
 
 const dimensions = Dimensions.get('window');
 const bubbleWidth = dimensions.height * 0.35 * 0.88;
@@ -13,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.appName}>Keepit</Text>
       <View style={styles.bubbleContainer}>
-        <ImageBackground style={styles.bubble} source={require('../../assets/bubble.png')}>
+        <ImageBackground style={styles.bubble} source={Bubble}>
           <Text style={styles.topic}>How's the weather today?</Text>
         </ImageBackground>
       </View>
@@ -23,7 +34,7 @@ const HomeScreen = ({ navigation }) => {
           title="Camera"
           onPress={() => navigation.navigate('Camera')}
         >
-          <Image style={{ width: 60, height: 60 }} source={require('../../assets/buttonImg.png')} />
+          <Image style={{ width: 60, height: 60 }} source={Plus} />
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
@@ -62,7 +73,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'top',
+    justifyContent: 'center',
   },
   button: {},
 });
