@@ -8,7 +8,7 @@ import ArrowButton from '../components/ArrowButton';
 import ImageBox from '../components/ImageBox';
 
 import Emotion from '../components/Emotion';
-import stories from '../stores/stories';
+
 
 
 const BoardScreen = ({ navigation }) => {
