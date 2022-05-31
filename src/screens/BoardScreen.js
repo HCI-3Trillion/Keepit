@@ -2,14 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import StoryContext from '../stores/StoryContext';
 
+
 import { EmotionName } from '../utils/constants';
 import ArrowButton from '../components/ArrowButton';
 import ImageBox from '../components/ImageBox';
+
+import Emotion from '../components/Emotion';
+import stories from '../stores/stories';
+
 
 const BoardScreen = ({ navigation }) => {
   const { stories } = useContext(StoryContext);
   const [boardNum, setBoardNum] = useState(0);
   const [storyList, setStoryList] = useState(stories.sort((a, b) => b.id - a.id));
+  const [emotionTag, setEmotionTag] = useState(<Text style={styles.emotionTitle}>ALL</Text>);
 
   useEffect(() => {
     setStoryList(stories.sort((a, b) => b.id - a.id));
@@ -25,11 +31,18 @@ const BoardScreen = ({ navigation }) => {
     setStoryList(list);
   }, [boardNum]);
 
+  const checkEmotion = (boardNum) => {
+    if (boardNum === 0) setEmotionTag(<Text style={styles.emotionTitle}>ALL</Text>);
+    else if (boardNum !== 0) setEmotionTag(<Emotion emotion={EmotionName[boardNum]} />);
+  };
+
   const onIncrease = () => {
+    checkEmotion((boardNum + 1) % 10);
     setBoardNum((boardNum + 1) % 10);
   };
 
   const onDecrease = () => {
+    checkEmotion(boardNum - 1 == -1 ? 9 : boardNum - 1);
     setBoardNum(boardNum - 1 == -1 ? 9 : boardNum - 1);
   };
 
@@ -43,11 +56,9 @@ const BoardScreen = ({ navigation }) => {
         <Text style={styles.title}>My Memory</Text>
 
         <View style={styles.emotionContainer}>
-          <ArrowButton iconName="left" handler={onDecrease} />
-          <View style={styles.emotionTitleWrap}>
-            <Text style={styles.emotionTitle}>{EmotionName[boardNum]}</Text>
-          </View>
-          <ArrowButton iconName="right" handler={onIncrease} />
+          <ArrowButton style={styles.emotionButton} iconName="left" handler={onDecrease} />
+          <View style={styles.emotionTitleWrap}>{emotionTag}</View>
+          <ArrowButton style={styles.emotionButton} iconName="right" handler={onIncrease} />
         </View>
       </View>
       <View style={styles.scroll}>
@@ -81,16 +92,20 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 25,
     marginBottom: 20,
+    flex: 1,
   },
   emotionContainer: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 30,
+    flex: 1,
   },
   emotionTitleWrap: {
-    width: 60,
-    justifyContent: 'center',
+    alignItems: 'center',
+    width: 100,
+  },
+  emotionButton: {
     alignItems: 'center',
   },
   emotionTitle: {
@@ -98,9 +113,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   scroll: {
-    flex: 9,
+    flex: 8,
     width: Dimensions.get('window').width,
   },
 });
+
+const estyles = (isSelected) =>
+  StyleSheet.create({
+    emotion: {
+      borderColor: isSelected ? ColorCode.PRIMARY : 'transparent',
+      borderWidth: 5,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  });
 
 export default BoardScreen;
