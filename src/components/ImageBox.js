@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 
 import { ColorCode } from '../utils/constants';
-import stories from '../stores/stories';
 
 const ImageBox = ({ imgLink, handler }) => {
   return (

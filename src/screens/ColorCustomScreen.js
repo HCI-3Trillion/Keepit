@@ -11,7 +11,7 @@ const EmotionSelectScreen = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.titleWrapper}>
-        <Text style={styles.title}>How do you feel?</Text>
+        <Text style={styles.title}>Custom color</Text>
       </View>
       <View style={styles.emotionContainer}>
         <View style={styles.row}>

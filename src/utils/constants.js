@@ -51,4 +51,21 @@ const EmotionName = [
   'Laugh',
 ];
 
-export { ColorCode, EmotionName, Palette };
+const MonthName = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const DayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+export { ColorCode, EmotionName, Palette, MonthName, DayName };
