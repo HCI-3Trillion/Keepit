@@ -8,6 +8,8 @@ const CameraScreen = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [camera, setCamera] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
+  const [state, setState] = useState(Camera.Constants.FlashMode.off);
+  const [flashImg, setFlashImage] = useState('flash-off');
 
   useEffect(() => {
     getPermissions();
@@ -32,11 +34,16 @@ const CameraScreen = ({ navigation }) => {
   };
 
   const pressFlash = () => {
-    setType(
-      type === Camera.Constants.FlashMode.off
-        ? Camera.Constants.FlashMode.on
-        : Camera.Constants.FlashMode.off
-    );
+    if (state === Camera.Constants.FlashMode.off) {
+      setState(Camera.Constants.FlashMode.on);
+      setFlashImage('flash-on');
+    } else if (state === Camera.Constants.FlashMode.on) {
+      setState(Camera.Constants.FlashMode.auto);
+      setFlashImage('flash-auto');
+    } else if (state === Camera.Constants.FlashMode.auto) {
+      setState(Camera.Constants.FlashMode.off);
+      setFlashImage('flash-off');
+    }
   };
 
   if (hasPermission === null) {
@@ -49,23 +56,23 @@ const CameraScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.cameraContainer}>
-        <Camera style={styles.camera} ref={(ref) => setCamera(ref)} type={type} />
+        <Camera style={styles.camera} ref={(ref) => setCamera(ref)} type={type} flashMode={state} />
       </View>
 
       <View style={styles.buttonContainer}>
         {/* 플래쉬 */}
         <TouchableOpacity style={styles.buttonFlash} onPress={pressFlash}>
-          <MaterialIcons name="flash-off" size={40} color="white" />
+          <MaterialIcons name={flashImg} size={30} color="white" />
         </TouchableOpacity>
 
         {/* 사진 찍기 */}
         <TouchableOpacity style={styles.buttonTakePicture} onPress={takePicture}>
-          <MaterialIcons name="camera" size={90} color="white" />
+          <MaterialIcons name="camera" size={80} color="white" />
         </TouchableOpacity>
 
         {/* 화면 전환 */}
         <TouchableOpacity style={styles.buttonFlip} onPress={pressFlip}>
-          <MaterialCommunityIcons name="rotate-3d-variant" size={40} color="white" />
+          <MaterialCommunityIcons name="rotate-3d-variant" size={30} color="white" />
         </TouchableOpacity>
       </View>
 
@@ -80,17 +87,18 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   cameraContainer: {
-    flex: 8,
+    flex: 8.5,
     flexDirection: 'row',
   },
   camera: {
     flex: 1,
   },
   buttonContainer: {
-    flex: 2,
+    flex: 1.5,
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   buttonFlash: {
     flex: 1,
     alignItems: 'center',
