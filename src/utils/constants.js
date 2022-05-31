@@ -68,4 +68,17 @@ const MonthName = [
 
 const DayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export { ColorCode, EmotionName, Palette, MonthName, DayName };
+const Topic = [
+  "How's the weather today?",
+  'How does the sky look like?',
+  'What are you looking at?',
+  'Is there an animal around you?',
+  'Is there a flower or tree around you?',
+  'What are you wearing right now?',
+  'What are you eating right now?',
+  'Who are you with?',
+  'Are you at home, or outside?',
+  'What shoes are you wearing?',
+];
+
+export { ColorCode, EmotionName, Palette, MonthName, DayName, Topic };
