@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
+import StoryContext from '../stores/StoryContext';
 
 import ArrowButton from '../components/ArrowButton';
 import DayBox from '../components/DayBox';
 
-import stories from '../stores/stories';
 import { ColorCode, MonthName, DayName } from '../utils/constants';
 
 const CalendarScreen = ({ navigation }) => {
+  const { stories } = useContext(StoryContext);
   const [date, setDate] = useState(new Date());
   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   const lastDate = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
