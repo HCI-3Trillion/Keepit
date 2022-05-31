@@ -174,6 +174,62 @@ const storiesdb = [
     emotion: 'Angry',
     imgLink: require('../../assets/stories/24.jpg'),
   },
+  {
+    id: 25,
+    date: new Date(2022, 4, 26),
+    comment: 'Sushi time!',
+    emotion: 'Happy',
+    imgLink: require('../../assets/stories/25.jpg'),
+  },
+  {
+    id: 26,
+    date: new Date(2022, 4, 27),
+    comment: 'The moon appears in the middle of leaves',
+    emotion: 'Amazed',
+    imgLink: require('../../assets/stories/26.jpg'),
+  },
+  {
+    id: 27,
+    date: new Date(2022, 4, 28),
+    comment: 'This jjajang ramen is too greasy.',
+    emotion: 'Panic',
+    imgLink: require('../../assets/stories/27.jpg'),
+  },
+  {
+    id: 28,
+    date: new Date(2022, 4, 29),
+    comment: 'Chocolate cake is always the right choice.',
+    emotion: 'Joyful',
+    imgLink: require('../../assets/stories/28.jpg'),
+  },
+  {
+    id: 29,
+    date: new Date(2022, 4, 30),
+    comment: "Mini donut that doesn't look like mini donut.",
+    emotion: 'Laugh',
+    imgLink: require('../../assets/stories/29.jpg'),
+  },
+  {
+    id: 30,
+    date: new Date(2022, 5, 1),
+    comment: 'What a Lovely alleyway.',
+    emotion: 'Love',
+    imgLink: require('../../assets/stories/30.jpg'),
+  },
+  {
+    id: 31,
+    date: new Date(2022, 5, 2),
+    comment: 'Those manila clams made me sick',
+    emotion: 'Sick',
+    imgLink: require('../../assets/stories/31.jpg'),
+  },
+  {
+    id: 32,
+    date: new Date(2022, 5, 3),
+    comment: "Beautiful flowers that I don't know the name of.",
+    emotion: 'Shy',
+    imgLink: require('../../assets/stories/32.jpg'),
+  },
 ];
 
 export default storiesdb;
