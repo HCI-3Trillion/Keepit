@@ -2,14 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
 import StoryContext from '../stores/StoryContext';
 
-
 import { EmotionName } from '../utils/constants';
 import ArrowButton from '../components/ArrowButton';
 import ImageBox from '../components/ImageBox';
 
 import Emotion from '../components/Emotion';
-
-
 
 const BoardScreen = ({ navigation }) => {
   const { stories } = useContext(StoryContext);
@@ -110,7 +107,7 @@ const styles = StyleSheet.create({
   },
   emotionTitle: {
     color: 'black',
-    fontSize: 15,
+    fontSize: 20,
   },
   scroll: {
     flex: 8,
