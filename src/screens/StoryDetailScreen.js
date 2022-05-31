@@ -17,7 +17,7 @@ const StoryDetailScreen = ({ route }) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{comment}</Text>
-        <Text style={styles.date}>{date}</Text>
+        <Text style={styles.date}>{date.toDateString()}</Text>
       </View>
     </View>
   );
