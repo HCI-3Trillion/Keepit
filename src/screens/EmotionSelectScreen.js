@@ -13,7 +13,7 @@ const EmotionSelectScreen = ({ route, navigation }) => {
 
   const saveStory = () => {
     if (emotion === null) {
-      Alert.alert('Warning', 'You should choose any emotion.', [
+      Alert.alert('Warning', 'Please choose an emotion.', [
         {
           text: 'OK',
           style: 'cancel',

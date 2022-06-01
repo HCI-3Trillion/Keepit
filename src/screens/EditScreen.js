@@ -18,7 +18,7 @@ const EditScreen = ({ route, navigation }) => {
 
   const pressButton = () => {
     if (comment === '') {
-      Alert.alert('Warning', 'You should write any comments.', [
+      Alert.alert('Warning', 'Please write any comments.', [
         {
           text: 'OK',
           style: 'cancel',
@@ -30,7 +30,7 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <ScrollView>
         <View style={styles.contentContainer}>
           <View style={styles.imageWrapper}>
