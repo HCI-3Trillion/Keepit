@@ -10,22 +10,24 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ColorCode } from '../utils/constants';
+import { ColorCode, Topic } from '../utils/constants';
 import Bubble from '../../assets/bubble.png';
 import Plus from '../../assets/buttonImg.png';
-//import { ImageBackground, TouchableOpacity } from 'react-native-web';
 
 const dimensions = Dimensions.get('window');
 const bubbleWidth = dimensions.height * 0.35 * 0.88;
 const bubbleHeight = dimensions.height * 0.35;
 
 const HomeScreen = ({ navigation }) => {
+  const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
   return (
     <View style={styles.container}>
       <Text style={styles.appName}>Keepit</Text>
       <View style={styles.bubbleContainer}>
         <ImageBackground style={styles.bubble} source={Bubble}>
-          <Text style={styles.topic}>How's the weather today?</Text>
+          {/* <Text style={styles.topic}>How's the weather today?</Text> */}
+          <Text style={styles.topic}>{Topic[getRandom(0, 10)]}</Text>
         </ImageBackground>
       </View>
       <View style={styles.buttonContainer}>
@@ -62,7 +64,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   bubble: {
-    alignItems: 'center',
     justifyContent: 'center',
     width: bubbleWidth,
     height: bubbleHeight,
