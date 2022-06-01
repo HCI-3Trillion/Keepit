@@ -30,25 +30,23 @@ const EditScreen = ({ route, navigation }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    <KeyboardAvoidingView style={styles.container}>
       <ScrollView>
-        <View style={styles.contentContainer}>
-          <View style={styles.imageWrapper}>
-            <Image source={{ uri: imgUri }} style={styles.image} />
-          </View>
-          <View style={styles.inputWrapper}>
-            <TextInput
-              style={styles.input}
-              placeholder="Add a comment..."
-              multiline
-              numberOfLines={5}
-              onChangeText={(newCmt) => setComment(newCmt)}
-              textAlignVertical={'top'}
-            />
-          </View>
-          <BasicButton title="Choose Emotions" handler={pressButton} />
+        <View style={styles.imageWrapper}>
+          <Image source={{ uri: imgUri }} style={styles.image} />
         </View>
       </ScrollView>
+      <View style={styles.inputWrapper}>
+        <TextInput
+          style={styles.input}
+          placeholder="Add a comment..."
+          multiline
+          numberOfLines={5}
+          onChangeText={(newCmt) => setComment(newCmt)}
+          textAlignVertical={'top'}
+        />
+        <BasicButton title="Choose Emotions" handler={pressButton} />
+      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -57,26 +55,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  contentContainer: {},
+  imageWrapper: {
+    marginTop: 10,
+    flex: 1,
+    flexDirection: 'row',
+    padding: 10,
+    paddingTop: 20,
+  },
+  image: {
+    flex: 1,
+    aspectRatio: 1,
+    borderRadius: 10,
+  },
+
   inputWrapper: {
     padding: 10,
+    paddingBottom: 30,
+    borderRadius: 10,
   },
   input: {
     borderWidth: 1,
     borderColor: ColorCode.GRAY1,
     borderRadius: 10,
     padding: 10,
-  },
-  imageWrapper: {
-    marginTop: 10,
-    flex: 1,
-    flexDirection: 'row',
-    padding: 10,
-  },
-  image: {
-    flex: 1,
-    aspectRatio: 1,
-    borderRadius: 10,
   },
 });
 
