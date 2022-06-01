@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import StoryContext from '../stores/StoryContext';
 
 import BasicButton from '../components/BasicButton';
@@ -11,17 +11,25 @@ const EmotionSelectScreen = ({ route, navigation }) => {
   const [emotion, setEmotion] = useState(null);
   const { imgUri, comment } = route.params;
 
-  const saveStory = async () => {
-    const newStory = {
-      comment,
-      emotion,
-      imgLink: { uri: imgUri },
-      date: new Date(),
-    };
-    setStories((prev) => [...prev, { ...newStory, id: storyNum }]);
-    setStoryNum((prev) => prev + 1);
-    console.log(stories);
-    navigation.navigate('StoryDetail', newStory);
+  const saveStory = () => {
+    if (emotion === null) {
+      Alert.alert('Warning', 'You should choose any emotion.', [
+        {
+          text: 'OK',
+          style: 'cancel',
+        },
+      ]);
+    } else {
+      const newStory = {
+        comment,
+        emotion,
+        imgLink: { uri: imgUri },
+        date: new Date(),
+      };
+      setStories((prev) => [...prev, { ...newStory, id: storyNum }]);
+      setStoryNum((prev) => prev + 1);
+      navigation.navigate('StoryDetail', newStory);
+    }
   };
 
   return (

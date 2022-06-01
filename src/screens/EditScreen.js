@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, KeyboardAvoidingView, ScrollView, Image, TextInput, View } from 'react-native';
+import {
+  StyleSheet,
+  KeyboardAvoidingView,
+  ScrollView,
+  Image,
+  TextInput,
+  View,
+  Alert,
+} from 'react-native';
 
 import BasicButton from '../components/BasicButton';
 import { ColorCode } from '../utils/constants';
@@ -7,6 +15,19 @@ import { ColorCode } from '../utils/constants';
 const EditScreen = ({ route, navigation }) => {
   const [comment, setComment] = useState('');
   const { imgUri } = route.params;
+
+  const pressButton = () => {
+    if (comment === '') {
+      Alert.alert('Warning', 'You should write any comments.', [
+        {
+          text: 'OK',
+          style: 'cancel',
+        },
+      ]);
+    } else {
+      navigation.navigate('EmotionSelect', { comment, imgUri });
+    }
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
@@ -25,10 +46,7 @@ const EditScreen = ({ route, navigation }) => {
               textAlignVertical={'top'}
             />
           </View>
-          <BasicButton
-            title="Choose Emotions"
-            handler={() => navigation.navigate('EmotionSelect', { comment, imgUri })}
-          />
+          <BasicButton title="Choose Emotions" handler={pressButton} />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
