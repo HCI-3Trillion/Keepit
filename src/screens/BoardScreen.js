@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
-import StoryContext from '../stores/StoryContext';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
+import StoryContext from '../stores/StoryContext';
 import { EmotionName } from '../utils/constants';
 import ArrowButton from '../components/ArrowButton';
 import ImageBox from '../components/ImageBox';
-
 import Emotion from '../components/Emotion';
 
 const BoardScreen = ({ navigation }) => {
@@ -58,7 +58,7 @@ const BoardScreen = ({ navigation }) => {
           <ArrowButton style={styles.emotionButton} iconName="right" handler={onIncrease} />
         </View>
       </View>
-      <View style={styles.scroll}>
+      <GestureRecognizer onSwipeLeft={onIncrease} onSwipeRight={onDecrease} style={styles.scroll}>
         <FlatList
           key={'#'}
           data={storyList}
@@ -68,7 +68,7 @@ const BoardScreen = ({ navigation }) => {
           keyExtractor={(item) => item.id}
           numColumns={3}
         />
-      </View>
+      </GestureRecognizer>
     </View>
   );
 };

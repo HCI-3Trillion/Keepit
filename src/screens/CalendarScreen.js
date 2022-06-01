@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { StyleSheet, Text, View, FlatList, Dimensions } from 'react-native';
-import StoryContext from '../stores/StoryContext';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
+import StoryContext from '../stores/StoryContext';
 import ArrowButton from '../components/ArrowButton';
 import DayBox from '../components/DayBox';
-
 import { ColorCode, MonthName, DayName } from '../utils/constants';
 
 const CalendarScreen = ({ navigation }) => {
@@ -53,7 +53,11 @@ const CalendarScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={styles.calendarContainer}>
+      <GestureRecognizer
+        onSwipeLeft={nextMonth}
+        onSwipeRight={prevMonth}
+        style={styles.calendarContainer}
+      >
         <View style={styles.dayNameContainer}>
           {DayName.map((dayName) => (
             <Text style={styles.dayName} key={dayName}>
@@ -79,7 +83,7 @@ const CalendarScreen = ({ navigation }) => {
             numColumns={7}
           />
         </View>
-      </View>
+      </GestureRecognizer>
     </View>
   );
 };
