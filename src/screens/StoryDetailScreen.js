@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   emotionContainer: {
     alignItems: 'center',
     margin: 15,
+    paddingTop: 20,
   },
   imageWrapper: {
     flexDirection: 'row',

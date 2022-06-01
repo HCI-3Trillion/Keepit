@@ -45,7 +45,7 @@ const EditScreen = ({ route, navigation }) => {
           onChangeText={(newCmt) => setComment(newCmt)}
           textAlignVertical={'top'}
         />
-        <BasicButton title="Choose Emotions" handler={pressButton} />
+        <BasicButton title="Choose Emotion" handler={pressButton} />
       </View>
     </KeyboardAvoidingView>
   );
