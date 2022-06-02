@@ -23,23 +23,19 @@ const HomeScreen = ({ navigation }) => {
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const { stories } = useContext(StoryContext);
 
+  const isSameDate = (storyDate, currDate) => {
+    return (
+      storyDate.getFullYear() == currDate.getFullYear() &&
+      storyDate.getMonth() == currDate.getMonth() &&
+      storyDate.getDate() == currDate.getDate()
+    );
+  };
+
   const checkPosting = () => {
-    // 최신 기록의 날짜 확인
-    var newest = stories[stories.length - 1].date;
-    var nYear = newest.getFullYear();
-    var nMonth = newest.getMonth();
-    var nDay = newest.getDate();
+    const newest = stories[stories.length - 1].date;
+    const today = new Date();
 
-    // 오늘 날짜 구하기
-    var today = new Date();
-    var tYear = today.getFullYear();
-    var tMonth = today.getMonth();
-    var tDay = today.getDate();
-
-    //날짜 비교
-    var newestDate = new Date(nYear, nMonth, nDay);
-    var todayDate = new Date(tYear, tMonth, tDay);
-    if (newestDate.getTime() == todayDate.getTime()) {
+    if (isSameDate(newest, today)) {
       Alert.alert('Warning', 'You can only upload one story a day.', [
         {
           text: 'OK',

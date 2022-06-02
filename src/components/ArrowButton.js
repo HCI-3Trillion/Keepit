@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { ColorCode } from '../utils/constants';
 import { AntDesign } from '@expo/vector-icons';
@@ -13,16 +13,16 @@ const ArrowButton = ({ iconName, handler }) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:30,
-        height:30,
-        borderRadius:10,
-        borderColor: ColorCode.GRAY1,
-        borderWidth:1,
-    },
+  container: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    borderColor: ColorCode.GRAY1,
+    borderWidth: 1,
+  },
 });
 
 export default ArrowButton;
