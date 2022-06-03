@@ -1,4 +1,4 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import TabNavigation from './src/navigations/TabNavigation';
 import ColorContext from './src/stores/ColorContext';
 import StoryContext from './src/stores/StoryContext';

@@ -7,7 +7,7 @@ import Emotion from '../components/Emotion';
 import { ColorCode } from '../utils/constants';
 
 const EmotionSelectScreen = ({ route, navigation }) => {
-  const { stories, setStories, setStoryNum, storyNum } = useContext(StoryContext);
+  const { setStories, setStoryNum, storyNum } = useContext(StoryContext);
   const [emotion, setEmotion] = useState(null);
   const { imgUri, comment } = route.params;
 
