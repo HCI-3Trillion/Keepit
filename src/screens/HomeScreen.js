@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -26,7 +26,8 @@ const helpHeight = dimensions.height * 0.9;
 
 const HomeScreen = ({ navigation }) => {
   const { stories } = useContext(StoryContext);
-  const [helpVisible, setHelpVisible] = React.useState(false);
+  const [helpVisible, setHelpVisible] = useState(false);
+  const today = new Date().getDate();
   const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const toggle = () => setHelpVisible(!helpVisible);
 
@@ -67,7 +68,7 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <View style={styles.bubbleContainer}>
         <ImageBackground style={styles.bubble} source={Bubble}>
-          <Text style={styles.topic}>{Topic[getRandom(0, Topic.length)]}</Text>
+          <Text style={styles.topic}>{Topic[today % Topic.length]}</Text>
         </ImageBackground>
       </View>
       <View style={styles.buttonContainer}>
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
     textAlign: 'center',
-    padding: '0px 20px',
+    padding: 20,
   },
   buttonContainer: {
     flex: 1,
