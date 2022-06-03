@@ -81,4 +81,24 @@ const Topic = [
   'What shoes are you wearing?',
 ];
 
-export { ColorCode, EmotionName, Palette, MonthName, DayName, Topic };
+const Help = `
+Q. How can I edit/delete stories that have already been uploaded?
+A. Keepit doesn't provide an edit/delete function in order to capture the emotion of the very moment and to prevent it from being distorted.
+ 
+Q. I don't like the colors of emotions
+A. Click on the setting button on the bottom right corner and customize the colors as you want.
+ 
+Q. How can I filter stories by emotion?
+A. On your memory board, you can swipe right/left or click on the arrow buttons. You can see stories filtered by emotion.
+ 
+Q. It's hard to come up with what to write about or what to take a picture of.
+A. You can refer to a recommended topic on the home screen.
+ 
+Q. I can't upload a photo I took.
+A. Please check if you have written a comment and chosen an emotion. You cannot upload only a photo.
+ 
+Q. I want to upload multiple stories.
+A. You can only upload one story a day.
+`;
+
+export { ColorCode, EmotionName, Palette, MonthName, DayName, Topic, Help };
