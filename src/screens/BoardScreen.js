@@ -11,20 +11,20 @@ import Emotion from '../components/Emotion';
 const BoardScreen = ({ navigation }) => {
   const { stories } = useContext(StoryContext);
   const [boardNum, setBoardNum] = useState(0);
-  const [storyList, setStoryList] = useState(stories.sort((a, b) => b.id - a.id));
+  const [storyList, setStoryList] = useState(stories.sort((a, b) => b.date - a.date));
   const [emotionTag, setEmotionTag] = useState(<Text style={styles.emotionTitle}>ALL</Text>);
 
   useEffect(() => {
-    setStoryList(stories.sort((a, b) => b.id - a.id));
+    setStoryList(stories.sort((a, b) => b.date - a.date));
   }, [stories]);
 
   useEffect(() => {
     const list =
       boardNum == 0
-        ? stories.sort((a, b) => b.id - a.id)
+        ? stories.sort((a, b) => b.date - a.date)
         : stories
             .filter((story) => story.emotion == EmotionName[boardNum])
-            .sort((a, b) => b.id - a.id);
+            .sort((a, b) => b.date - a.date);
     setStoryList(list);
   }, [boardNum]);
 
