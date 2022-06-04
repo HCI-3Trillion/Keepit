@@ -230,6 +230,13 @@ const storiesdb = [
     emotion: 'Shy',
     imgLink: require('../../assets/stories/32.jpg'),
   },
+  {
+    id: 33,
+    date: new Date(2022, 4, 31),
+    comment: 'Giant marshmallow!!!!!!!! Mallang mallang~~',
+    emotion: 'Joyful',
+    imgLink: require('../../assets/stories/33.jpg'),
+  },
 ];
 
 export default storiesdb;

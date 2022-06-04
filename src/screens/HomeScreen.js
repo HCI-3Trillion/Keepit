@@ -28,7 +28,6 @@ const HomeScreen = ({ navigation }) => {
   const { stories } = useContext(StoryContext);
   const [helpVisible, setHelpVisible] = useState(false);
   const today = new Date().getDate();
-  const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const toggle = () => setHelpVisible(!helpVisible);
 
   const isSameDate = (storyDate, currDate) => {
@@ -58,7 +57,7 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.appName}>Keepit</Text>
-        <TouchableOpacity title="help" onPress={toggle}>
+        <TouchableOpacity style={{ padding: 3 }} title="help" onPress={toggle}>
           <Image style={{ width: 40, height: 40 }} source={QuestionMark} />
         </TouchableOpacity>
       </View>
