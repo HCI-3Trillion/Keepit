@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,20 +8,28 @@ import {
   ImageBackground,
   TouchableOpacity,
   Alert,
+  Modal,
+  ScrollView,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { ColorCode, Topic } from '../utils/constants';
+import { ColorCode, Topic, Help } from '../utils/constants';
 import Bubble from '../../assets/bubble.png';
 import Plus from '../../assets/buttonImg.png';
+import QuestionMark from '../../assets/helpImg.png';
 import StoryContext from '../stores/StoryContext';
+import BasicButton from '../components/BasicButton.js';
 
 const dimensions = Dimensions.get('window');
 const bubbleWidth = dimensions.height * 0.35 * 0.88;
 const bubbleHeight = dimensions.height * 0.35;
+const helpHeight = dimensions.height * 0.9;
 
 const HomeScreen = ({ navigation }) => {
-  const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
   const { stories } = useContext(StoryContext);
+  const [helpVisible, setHelpVisible] = useState(false);
+  const today = new Date().getDate();
+  const getRandom = (min, max) => Math.floor(Math.random() * (max - min) + min);
+  const toggle = () => setHelpVisible(!helpVisible);
 
   const isSameDate = (storyDate, currDate) => {
     return (
@@ -48,18 +56,40 @@ const HomeScreen = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.appName}>Keepit</Text>
+      <View style={styles.topContainer}>
+        <Text style={styles.appName}>Keepit</Text>
+        <TouchableOpacity title="help" onPress={toggle}>
+          <Image style={{ width: 40, height: 40 }} source={QuestionMark} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.bubbleContainer}>
         <ImageBackground style={styles.bubble} source={Bubble}>
-          <Text style={styles.topic}>{Topic[getRandom(0, 10)]}</Text>
+          <Text style={styles.topic}>{Topic[today % Topic.length]}</Text>
         </ImageBackground>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} title="Camera" onPress={checkPosting}>
+        <TouchableOpacity title="Camera" onPress={checkPosting}>
           <Image style={{ width: 60, height: 60 }} source={Plus} />
         </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
+      <Modal
+        styles={{ position: 'absolute' }}
+        transparent={true}
+        animationType="slide"
+        visible={helpVisible}
+        onRequestClose={() => {
+          setHelpVisible(!helpVisible);
+        }}
+      >
+        <View style={styles.helpContainer}>
+          <Text style={{ fontSize: 17, fontWeight: 'bold' }}>FAQs</Text>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <Text>{Help}</Text>
+          </ScrollView>
+          <BasicButton title="Close" handler={toggle} />
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -68,6 +98,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  topContainer: {
+    flexDirection: 'row',
+    flex: 0.5,
+    justifyContent: 'space-between',
   },
   appName: {
     flex: 0.5,
@@ -92,6 +127,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
     textAlign: 'center',
+    padding: 20,
   },
   buttonContainer: {
     flex: 1,
@@ -99,6 +135,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button: {},
+  helpContainer: {
+    height: helpHeight,
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
 });
 
 export default HomeScreen;
